@@ -955,7 +955,7 @@ int dsi_panel_op_set_hbm_mode(struct dsi_panel *panel, int level)
 {
 	int rc = 0;
 	u32 count;
-    struct dsi_display_mode *mode;
+	struct dsi_display_mode *mode;
 
 	if (!panel || !panel->cur_mode) {
 		pr_err("Invalid params\n");
@@ -964,36 +964,41 @@ int dsi_panel_op_set_hbm_mode(struct dsi_panel *panel, int level)
 
 	mutex_lock(&panel->panel_lock);
 
-    mode = panel->cur_mode;
-    switch (level) {
-    case 0:
-        count = mode->priv_info->cmd_sets[DSI_CMD_SET_HBM_OFF].count;
-        if (!count) {
-            pr_err("This panel does not support HBM mode off.\n");
-            goto error;
-        } else {
-            rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_HBM_OFF);
-			printk(KERN_ERR"When HBM OFF -->hbm_backight = %d panel->bl_config.bl_level =%d\n",panel->hbm_backlight,panel->bl_config.bl_level);
-			rc= dsi_panel_update_backlight(panel,panel->hbm_backlight);
-        }
-    break;
-
-    case 1:
-        count = mode->priv_info->cmd_sets[DSI_CMD_SET_HBM_ON_5].count;
-        if (!count) {
-            pr_err("This panel does not support HBM mode.\n");
-            goto error;
-        } else {
-            rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_HBM_ON_5);
-        }
-    break;
-    default:
-    break;
-
+	mode = panel->cur_mode;
+	if (panel->hbm_mode == 5) {
+        level = 1;
     }
-    pr_err("Set HBM Mode = %d\n", level);
-	if(level==5)
-	{
+	switch (level) {
+	case 0:
+		count = mode->priv_info->cmd_sets[DSI_CMD_SET_HBM_OFF].count;
+		if (!count) {
+			pr_err("This panel does not support HBM mode off.\n");
+			goto error;
+		} else {
+			rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_HBM_OFF);
+			printk(KERN_DEBUG
+			       "When HBM OFF -->hbm_backight = %d panel->bl_config.bl_level =%d\n",
+			       panel->hbm_backlight, panel->bl_config.bl_level);
+			rc = dsi_panel_update_backlight(panel,
+							panel->hbm_backlight);
+		}
+		break;
+
+	case 1:
+		count = mode->priv_info->cmd_sets[DSI_CMD_SET_HBM_ON_5].count;
+		if (!count) {
+			pr_err("This panel does not support HBM mode.\n");
+			goto error;
+		} else {
+			rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_HBM_ON_5);
+		}
+		break;
+	default:
+		break;
+
+	}
+	pr_err("Set HBM Mode = %d\n", level);
+	if (level == 5) {
 		pr_err("HBM == 5 for fingerprint\n");
 	}
 
