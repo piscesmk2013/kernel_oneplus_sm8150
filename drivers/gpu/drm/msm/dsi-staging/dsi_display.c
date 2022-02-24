@@ -235,116 +235,117 @@ int dsi_display_set_backlight(struct drm_connector *connector,
 
 	if (dsi_display->panel->hw_type == DSI_PANEL_SAMSUNG_S6E3FC2X01) {
 		if (bl_lvl != 0 && panel->bl_config.bl_level == 0) {
+			if (panel->naive_display_loading_effect_mode) {
+				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_ON);
+			}
 			if (panel->naive_display_p3_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_P3_ON);
 			}
 			if (panel->naive_display_wide_color_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON);
 			}
 			if (panel->naive_display_srgb_color_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
 			}
+			if (panel->night_mode) {
+				mdelay(100);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
+			}
 			if (panel->naive_display_customer_srgb_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_OFF);
 			}
 			if (panel->naive_display_customer_p3_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_OFF);
 			}
 		}
 	}
 
 	if (dsi_display->panel->hw_type == DSI_PANEL_SAMSUNG_S6E3HC2) {
 		if (bl_lvl != 0 && panel->bl_config.bl_level == 0) {
+			if (panel->naive_display_loading_effect_mode) {
+				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_ON);
+			}
 			if (panel->naive_display_p3_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_P3_ON);
 			}
 			if (panel->naive_display_wide_color_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON);
 			}
 			if (panel->naive_display_srgb_color_mode) {
-				mdelay(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
 			}
-			if (panel->naive_display_loading_effect_mode) {
-				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_EFFECT_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_OFF);
+			if (panel->night_mode) {
+				mdelay(100);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
 			}
 			if (panel->naive_display_customer_srgb_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_OFF cmds\n");
-				//rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_OFF);
 			}
 			if (panel->naive_display_customer_p3_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_OFF cmds\n");
-				//rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_OFF);
 			}
 		}
 	}
 
 	if (dsi_display->panel->hw_type == DSI_PANEL_SAMSUNG_SOFEF03F_M) {
 		if (bl_lvl != 0 && panel->bl_config.bl_level == 0) {
+			if (panel->naive_display_loading_effect_mode) {
+				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_ON);
+			}
 			if (panel->naive_display_p3_mode) {
-				msleep(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_P3_ON);
 			}
 			if (panel->naive_display_wide_color_mode) {
-				msleep(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_WIDE_COLOR_ON);
 			}
 			if (panel->naive_display_srgb_color_mode) {
-				msleep(20);
+				mdelay(100);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
 			}
-			if (panel->naive_display_loading_effect_mode) {
-				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_EFFECT_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_EFFECT_OFF);
+			if (panel->night_mode) {
+				mdelay(100);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
 			}
 			if (panel->naive_display_customer_srgb_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_OFF);
 			}
 			if (panel->naive_display_customer_p3_mode) {
+				mdelay(100);
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_ON);
-			} else {
-				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_P3_OFF cmds\n");
-				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_P3_OFF);
 			}
 		}
 	}
