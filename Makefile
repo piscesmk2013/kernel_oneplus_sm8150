@@ -365,7 +365,7 @@ HOSTCXX      = g++
 HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
 		-fomit-frame-pointer -std=gnu89 -pipe $(HOST_LFS_CFLAGS)
 HOSTCXXFLAGS := -O2 $(HOST_LFS_CFLAGS)
-HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS)
+HOSTLDFLAGS  += $(HOST_LFS_LDFLAGS)
 HOST_LOADLIBES := $(HOST_LFS_LIBS)
 
 # Make variables (CC, etc...)
@@ -378,6 +378,8 @@ CPP		= $(CC) -E
 AR		= llvm-ar
 NM		= llvm-nm
 STRIP		= llvm-strip
+HOSTLDFLAGS	+= -fuse-ld=lld
+HOSTCFLAGS 	+= -fuse-ld=lld
 OBJCOPY		= llvm-objcopy
 OBJDUMP		= llvm-objdump
 AWK		= awk
