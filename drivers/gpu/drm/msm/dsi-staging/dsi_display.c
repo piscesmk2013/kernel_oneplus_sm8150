@@ -250,6 +250,11 @@ int dsi_display_set_backlight(struct drm_connector *connector,
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
 			}
+			if (panel->night_mode) {
+				mdelay(20);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
+			}
 			if (panel->naive_display_customer_srgb_mode) {
 				pr_debug("Send DSI_CMD_LOADING_CUSTOMER_RGB_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_LOADING_CUSTOMER_RGB_ON);
@@ -283,6 +288,11 @@ int dsi_display_set_backlight(struct drm_connector *connector,
 				mdelay(20);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
+			}
+			if (panel->night_mode) {
+				mdelay(20);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
 			}
 			if (panel->naive_display_loading_effect_mode) {
 				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
@@ -324,6 +334,11 @@ int dsi_display_set_backlight(struct drm_connector *connector,
 				msleep(20);
 				pr_debug("Send DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON cmds\n");
 				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NATIVE_DISPLAY_SRGB_COLOR_ON);
+			}
+			if (panel->night_mode) {
+				msleep(20);
+				pr_debug("Send DSI_CMD_SET_NIGHT_ON cmds\n");
+				rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_NIGHT_ON);
 			}
 			if (panel->naive_display_loading_effect_mode) {
 				pr_debug("Send DSI_CMD_LOADING_EFFECT_ON cmds\n");
