@@ -896,7 +896,7 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
 	saved_backlight = bl_lvl;
 
 	if (panel->dc_dim)
-		bl_lvl = 1023;
+		bl_lvl = op_dimlayer_bl_alpha;
 
 	if (panel->bl_config.bl_high2bit) {
 		if (cur_backlight == bl_lvl && (mode_fps != cur_fps ||
